@@ -1,0 +1,35 @@
+To retrieve the first 10 records from the `family` 
+table in the public MySQL database provided by Rfam, 
+we'll need to use a SQL query. Here's how you can do it:
+
+```sql
+SELECT *
+FROM family
+LIMIT 10;
+```
+
+This query selects all columns from the `family`
+ table and limits the result set to the first 10 records using the 
+ `LIMIT` clause.
+
+Now, to execute this query using Apache NiFi,
+ we can set up a flow with the following processors:
+
+1. ExecuteSQL Processor**:
+   a. Configure the processor to use the MySQL database connection 
+   details provided (host, port, user, password, database).
+   b. Set the SQL select query as `SELECT * FROM family LIMIT 10;`.
+
+2.  ConvertRecord Processor** (optional):
+   a.  If necessary, you can use this processor to convert the result 
+   set into a specific format (e.g., JSON, CSV) before writing it to a file.
+
+3. PutFile Processor**:
+   a. Configure this processor to write the data to a file.
+   b. Specify the directory and filename where you want to store the data.
+
+Connect these processors in a data flow, start the flow, and Apache NiFi will
+ retrieve the first 10 records from the `family` table and write them to the specified file.
+
+Once the flow is set up and tested, you can export the Apache NiFi flow 
+configuration as an XML.
